@@ -1,0 +1,35 @@
+sudo -i
+docker --version
+#lets deploy our first container 
+  16  docker container run --publish 80:80 --detach nginx
+   17  docker ps
+   18  curl localhost
+######docker image once download next time i dont need to download it will look for the image in the local repo
+  22  docker ps
+   23  docker run -p 81:80 -d nginx
+   24  docker ps
+   25  docker images
+#########################lets try to undestand the detach 
+docker run -p 82:80 httpd
+##docker ps will show the running container
+docker ps 
+###this will show running and exit contianer
+docker ps -a
+#3how to check the logs of an container 
+  35  docker container run --publish 83:80 --name webhost -d nginx
+   36  docker ps
+   37  docker logs webhost
+   ######container are running as process id
+     40  docker run --name mongo -d mongo
+   41  docker ps
+   42  docker top mongo
+   43  ps aux
+   44  kill -9 4202
+   45  docker ps
+   46  docker ps -a
+   ##container are mini vm and they have everything inside like a virtual machine 
+    50  docker network ls
+   51  docker network inspect bridge
+   ##lets inspect an container also 
+   docker container inspect webhost
+

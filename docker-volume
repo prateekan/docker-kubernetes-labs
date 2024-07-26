@@ -1,0 +1,48 @@
+  69  docker container run -d -p 3306:3306 --name db -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql
+  ##this will create a mysql db with volumes
+   70  docker ps
+   ##this will give you the volume path
+   71  docker container inspect db
+   #####
+   72  docker volume ls
+##lets login inside the container and create a new datbase and see the effect in volume path 
+docker exec -it db bash
+mysql -u root -p 
+###press enter as we do not create and password 
+create database ntt;
+exit
+###again check the path of your db you will see an entry is created
+##create the volume with a custom name 
+91  docker container run -d -p 3306:3306 --name db -e MYSQL_ALLOW_EMPTY_PASSWORD=true -v mydb:/var/lib/mysql mysql
+   92  docker volume ls
+   93  docker inspect mydb
+   ####lets delete 
+    99  docker rm db --force
+  100  docker volume ls
+  103  docker volume remove mydb
+  104  docker volume ls
+##we will create a new mysql container with older version 
+  106  docker container run -d -p 3306:3306 --name db -e MYSQL_ALLOW_EMPTY_PASSWORD=true -v mydb:/var/lib/mysql mysql:8
+  107  docker ps
+  108  docker volume ls
+  ##we will create a new database 
+  109  docker exec -it db bash
+  mysql -u root -p 
+  create database newdb;
+  exit
+  exit 
+  ###########we will stop the db and delete it 
+   112  docker ps
+  113  docker stop db
+  ##we will delet the database 
+  114  docker rm db
+  ##once we delete the db the volume do not get deleted
+  115  docker volume ls
+  117  docker container run -d -p 3306:3306 --name db -e MYSQL_ALLOW_EMPTY_PASSWORD=true -v mydb:/var/lib/mysql mysql:8.4
+  118  docker ps
+##login inside the database 
+  120  docker exec -it db bash
+mysql -u root -p 
+show databases;
+###this will show the previous database which we have created with mysql 8 versio
+newdb 

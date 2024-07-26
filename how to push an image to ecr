@@ -1,0 +1,22 @@
+cd /root
+##3we will install aws cli 
+apt install unzip 
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+###to verfiy aws cli works or not 
+aws --version
+##lets confiure the access to aws 
+aws configure
+####
+copy the access key and paste it 
+AWS Access Key ID [None]: 
+AWS Secret Access Key [None]: 
+##region 
+Default region name [None]: us-east-1
+Default output format [None]: json
+##to verify access key and secret access key is working from your client machine we can create an s3 bucket
+254  aws s3 ls
+###provide an unique name to your s3 bucekt
+  255  aws s3 mb s3://gopal140999
+  256  aws s3 ls

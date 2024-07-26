@@ -1,0 +1,11 @@
+ sudo -i 
+ 172  cd spring-hello/
+ ##lets modify the base image 
+  178  vi dockerfile
+  ############chang the base image to amazon coreto
+  FROM amazoncorretto:8u422-alpine3.20-jre
+  ###lets rebuild it
+  179  docker build -t helloapp-alpine .
+  ##this will show the size of the new image 
+  180  docker images
+  181  docker image history a6e57e4e925e

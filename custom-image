@@ -1,0 +1,43 @@
+##legacy way to run your maven app 
+  123  apt install maven
+  124  git clone https://github.com/gopal1409/spring-hello.git
+  125  cd spring-hello/
+  126  mvn clean package
+  127  ls
+  128  cd target/
+  129  ls
+  130  java -jar spring-boot-2-hello-world-1.0.2-SNAPSHOT.jar
+  ###open port 8080 in sg of your instance
+  copy the public ip paste it in the browser
+  http://54.91.212.18:8080/hello
+  ##it will show the test page 
+  ##then press ctrl c to stopt he execution of jar file
+
+  #lets convert this app into an container based image 
+  cd ..
+  #####inside the spring folder create a file called as dockerfile
+  touch dockerfile
+  ###inside the docker file we will provide instruction 
+  vi dockerfile 
+###add the below instruction 
+FROM openjdk:18
+WORKDIR /app
+COPY ./target/*.jar /app
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app/spring-boot-2-hello-world-1.0.2-SNAPSHOT.jar"]
+#################once added build the image 
+ 146  docker build -t hello .
+ ##the above command will build the image with hello name 
+  147  docker images
+  ##check the layer of the image 
+  148  docker image history hello
+  #lets create a container with our custom image 
+  151  docker container run -d -p 84:8080 hello
+  152  docker ps
+  ####the below command will show the test page 
+  
+  154  curl localhost:84/hello
+  ##check the logs of your container 
+  155  docker logs 79cc0
+  ####finally publicip:84/hello 
+  ##the test page will be visiable in the browser
